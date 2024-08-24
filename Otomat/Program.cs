@@ -17,7 +17,17 @@
                     Console.Write($" {prices[i]} TL\n");
                 }
                 Console.WriteLine("Seçmek İstediğiniz Ürün Numarasını Giriniz:");
-                choice = Convert.ToInt32(Console.ReadLine());
+                try
+                {
+                    choice = Convert.ToInt32(Console.ReadLine());
+                }catch (IndexOutOfRangeException)
+                {
+                    Console.WriteLine("Geçersiz İşlem");
+                    Thread.Sleep(1000);
+                }
+                    catch (FormatException) { Console.WriteLine("Geçersiz Değer");
+                    Thread.Sleep(1000);
+                }
                 if (choice == -1) // admin paneline erişim
                 {
                     Console.WriteLine("Yönetici Paneline Erişmek için Şifre Giriniz:");
@@ -78,8 +88,7 @@
                                 Console.WriteLine("Hatalı Giriş!");
                                 Thread.Sleep(2000);
                                 continue;
-                            }
-                            Console.WriteLine(products.Length);
+                            }                            
                             Array.Resize(ref products, products.Length + 1);
                             Array.Resize(ref prices, prices.Length + 1);
                             products[products.Length - 1] = productName;
